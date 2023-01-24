@@ -1,0 +1,12 @@
+{% extends "AppCoder/padre.html" %}
+{% load static %}
+
+{% block contenidoCambia %}
+   {% for c in contactos %}
+    <li>{{c}}</li>
+    <button><a href="{% url 'EliminarContacto' c.nombre %}">Eliminar</a></button>
+    <button><a href="{% url 'EditarContacto' c.nombre %}">Editar</a></button>
+   {% endfor %}
+   <a href="{% url 'Contactos' %}">Agregar Contacto</a>
+{% endblock %}
+

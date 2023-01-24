@@ -1,0 +1,17 @@
+{% extends "AppCoder/padre.html" %}
+{% load static %}
+
+{% block contenidoCambia %}
+    <!-- Contenido Peliculas -->
+    <h2>Notas</h2>
+    {% if miFormulario.errors %}
+        <p>Error al enviar</p>
+    {% endif %}
+    <form action="" method="POST">{% csrf_token %}
+        <table>
+            {{miFormulario.as_table}}
+        </table>
+        <input type="submit" value="Enviar">
+    </form>
+    <a href="{% url 'BuscarNota' %}">Buscar Nota</a>
+{% endblock %}

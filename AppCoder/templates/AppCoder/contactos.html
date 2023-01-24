@@ -1,0 +1,18 @@
+{% extends "AppCoder/padre.html" %}
+{% load static %}
+
+{% block contenidoCambia %}
+    <!-- Contenido Formulario -->
+    <h2>Contactos</h2>
+    {% if miFormulario.errors %}
+        <p>Error al enviar</p>
+    {% endif %}
+    <form action="" method="POST">{% csrf_token %}
+        <table>
+            {{miFormulario.as_table}}
+        </table>
+        <input type="submit" value="Enviar">
+    </form>
+    <a href="{% url 'BuscarContacto' %}">Buscar Contacto</a>
+    <a href="{% url 'ListaContactos' %}">Lista de Contactos</a>
+{% endblock %}
