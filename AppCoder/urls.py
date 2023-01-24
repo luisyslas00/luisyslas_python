@@ -14,5 +14,11 @@ urlpatterns = [
     path('resultadoNota/', views.resultadoNota),
     path('listaContactos',views.listaContactos,name= "ListaContactos"),
     path('eliminarContacto/<contacto_nombre>/',views.eliminarContacto,name="EliminarContacto"),
-    path('editarContacto/<contacto_nombre>/',views.editarContacto,name="EditarContacto")
+    path('editarContacto/<contacto_nombre>/',views.editarContacto,name="EditarContacto"),
+    path('listaPeliculas',views.listaPeliculas,name= "ListaPeliculas"),
+    path('eliminarPelicula/<pelicula_nombre>/',views.eliminarPelicula,name="EliminarPelicula"),
+    path('editarPelícula/<pelicula_nombre>/',views.editarPelicula,name="EditarPelicula"),
+    path('listaNotas',views.listaNotas,name="ListaNotas"),
+    path('eliminarNota/<nota_mensaje>/',views.eliminarNota,name="EliminarNota"),
+    path('editarNota/<nota_mensaje>/',views.editarNota,name="EditarNota")
 ]

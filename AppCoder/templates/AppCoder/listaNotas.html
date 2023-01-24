@@ -1,0 +1,12 @@
+{% extends "AppCoder/padre.html" %}
+{% load static %}
+
+{% block contenidoCambia %}
+   {% for n in notas %}
+    <li>{{n}}</li>
+    <button><a href="{% url 'EliminarNota' n.mensaje %}">Eliminar</a></button>
+    <button><a href="{% url 'EditarNota' n.mensaje %}">Editar</a></button>
+   {% endfor %}
+   <a href="{% url 'Notas' %}">Agregar Nota</a>
+{% endblock %}
+

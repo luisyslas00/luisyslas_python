@@ -1,0 +1,12 @@
+{% extends "AppCoder/padre.html" %}
+{% load static %}
+
+{% block contenidoCambia %}
+   {% for p in peliculas %}
+    <li>{{p}}</li>
+    <button><a href="{% url 'EliminarPelicula' p.nombre %}">Eliminar</a></button>
+    <button><a href="{% url 'EditarPelicula' p.nombre %}">Editar</a></button>
+   {% endfor %}
+   <a href="{% url 'Peliculas' %}">Agregar Película</a>
+{% endblock %}
+

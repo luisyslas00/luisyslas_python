@@ -53,6 +53,8 @@ def notas(request):
  
     return render(request, "AppCoder/notas.html", {"miFormulario": miFormulario})
 
+#Buscar y Resultado - Contactos
+
 def buscarContacto(request):
     return render(request,"AppCoder/buscarContacto.html")
 
@@ -64,6 +66,8 @@ def resultadoContacto(request):
     else: 
         respuesta = "No enviaste datos"
     return HttpResponse(respuesta)
+
+#Buscar y Resultados - Peliculas
 
 def buscarPelicula(request):
     return render(request,"AppCoder/buscarPelicula.html")
@@ -77,6 +81,8 @@ def resultadoPelicula(request):
         respuesta = "No enviaste datos"
     return HttpResponse(respuesta)
 
+#Buscar y Resultados - Notas
+
 def buscarNota(request):
     return render(request,"AppCoder/buscarNota.html")
 
@@ -88,6 +94,8 @@ def resultadoNota(request):
     else: 
         respuesta = "No enviaste datos"
     return HttpResponse(respuesta)
+
+#CRUD Contactos - Lista, Eliminar y Editar
 
 def listaContactos(request):
     contactos = Contacto.objects.all()
@@ -117,3 +125,64 @@ def editarContacto(request,contacto_nombre):
     else:
         miFormulario = ContactoFormulario(initial={'nombre':contacto.nombre,'apellido':contacto.apellido,'telefono':contacto.telefono,'email':contacto.email})
     return render(request,"AppCoder/editarContacto.html",{"miFormulario":miFormulario,"contacto_nombre":contacto_nombre})
+
+# CRUD Peliculas - Listas, Eliminar y Editar
+
+def listaPeliculas(request):
+    peliculas = GuardarPelicula.objects.all()
+    contexto = {"peliculas":peliculas}
+    return render(request,"AppCoder/listaPeliculas.html",contexto)
+
+def eliminarPelicula(request,pelicula_nombre):
+    pelicula = GuardarPelicula.objects.get(nombre=pelicula_nombre)
+    pelicula.delete()
+    peliculas = GuardarPelicula.objects.all()
+    contexto = {"peliculas":peliculas}
+    return render(request,"AppCoder/listaPeliculas.html",contexto)
+
+
+def editarPelicula(request,pelicula_nombre):
+    pelicula= GuardarPelicula.objects.get(nombre=pelicula_nombre)
+    if request.method == "POST":
+        miFormulario = PeliculaFormulario(request.POST)
+        print(miFormulario)
+        if miFormulario.is_valid:
+            informacion = miFormulario.cleaned_data
+            pelicula.nombre = informacion['nombre']
+            pelicula.save()
+            return render(request,"AppCoder/inicio.html")
+    else:
+        miFormulario = PeliculaFormulario(initial={'nombre':pelicula.nombre})
+    return render(request,"AppCoder/editarPelicula.html",{"miFormulario":miFormulario,"pelicula_nombre":pelicula_nombre})
+
+#CRUD Notas - Listas, Eliminar y Editar
+
+def listaNotas(request):
+    notas = AgendarNota.objects.all()
+    contexto = {"notas":notas}
+    return render(request,"AppCoder/listaNotas.html",contexto)
+
+
+def eliminarNota(request,nota_mensaje):
+    nota = AgendarNota.objects.get(mensaje=nota_mensaje)
+    nota.delete()
+    notas = AgendarNota.objects.all()
+    contexto = {"notas":notas}
+    return render(request,"AppCoder/listaNotas.html",contexto)
+
+
+def editarNota(request,nota_mensaje):
+    nota= AgendarNota.objects.get(mensaje=nota_mensaje)
+    if request.method == "POST":
+        miFormulario = NotaFormulario(request.POST)
+        print(miFormulario)
+        if miFormulario.is_valid:
+            informacion = miFormulario.cleaned_data
+            nota.mensaje = informacion['mensaje']
+            nota.save()
+            return render(request,"AppCoder/inicio.html")
+    else:
+        miFormulario = NotaFormulario(initial={'mensaje':nota.mensaje})
+    return render(request,"AppCoder/editarNota.html",{"miFormulario":miFormulario,"nota_mensaje":nota_mensaje})
+
+#CBV
