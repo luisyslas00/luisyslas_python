@@ -1,0 +1,29 @@
+{% extends "AppCoder/padre.html" %}
+{% load static %}
+
+{% block contenidoCambia %}
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Apellido</th>
+                <th scope="col">Nombre</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contacto in object_list %}
+            <tr>
+                <th scope="row">{{contacto.apellido}}</th>
+                <td>{{contacto.nombre}}</td>
+                <td><a href="{% url 'Detail' contacto.id %}" class="btn btn-primary">Ver</a></td>
+                <td><a href="{% url 'Edit' contacto.id %}" class="btn btn-primary">Editar</a></td>
+                <td><a href="{% url 'Delete' contacto.id %}" class="btn btn-primary">Eliminar</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'New' %}" class="btn btn-success">Agregar nuevo contacto</a>
+    <a href="{% url 'Contactos' %}" class="btn btn-warning">Volver</a>
+{% endblock %}

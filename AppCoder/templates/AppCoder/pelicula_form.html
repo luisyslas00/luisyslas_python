@@ -1,0 +1,12 @@
+{% extends "AppCoder/padre.html" %}
+
+{% load static %}
+
+{% block contenidoCambia %}
+    <h1>Agregar Película</h1>
+    <form method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class="btn btn-success" value="Enviar"/>
+    </form>
+    <a href="{% url 'Peliculas' %}" class="btn btn-warning mt-4">Volver</a>
+{% endblock %}

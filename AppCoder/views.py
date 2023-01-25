@@ -1,7 +1,7 @@
 from django.http.request import QueryDict
 from django.shortcuts import render, HttpResponse
 from django.http import HttpResponse
-from AppCoder.forms import ContactoFormulario, PeliculaFormulario, NotaFormulario
+from AppCoder.forms import ContactoFormulario, PeliculaFormulario, NotaFormulario, UserRegisterForm
 from AppCoder.models import Contacto, GuardarPelicula, AgendarNota
 
 # Create your views here.
@@ -114,7 +114,7 @@ def editarContacto(request,contacto_nombre):
     if request.method == "POST":
         miFormulario = ContactoFormulario(request.POST)
         print(miFormulario)
-        if miFormulario.is_valid:
+        if miFormulaio.is_valid:
             informacion = miFormulario.cleaned_data
             contacto.nombre = informacion['nombre']
             contacto.apellido = informacion['apellido']
@@ -186,3 +186,123 @@ def editarNota(request,nota_mensaje):
     return render(request,"AppCoder/editarNota.html",{"miFormulario":miFormulario,"nota_mensaje":nota_mensaje})
 
 #CBV
+
+from django.views.generic import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
+#Contactos
+
+class ContactoList(ListView):
+    model = Contacto
+    template_name = "AppCoder/contactos_list.html"
+
+class ContactoDetalle(DetailView):
+    model = Contacto
+    template_name = "AppCoder/contacto_detalle.html"
+
+class ContactoCreacion(CreateView):
+    model = Contacto
+    success_url = "/AppCoder/contactos/list"
+    fields = ['nombre','apellido','telefono','email']
+
+class ContactoUpdate(UpdateView):
+    model = Contacto
+    success_url = "/AppCoder/contactos/list"
+    fields = ['nombre','apellido','telefono','email']
+
+class ContactoDelete(DeleteView):
+    model = Contacto
+    success_url = "/AppCoder/contactos/list"
+
+#Notas
+
+# class NotaList(ListView):
+#     model = AgendarNota
+#     template_name = "AppCoder/notas_list.html"
+
+# class NotaDetalle(DetailView):
+#     model = AgendarNota
+#     template_name = "AppCoder/nota_detalle.html"
+
+# class NotaCreacion(CreateView):
+#     model = AgendarNota
+#     success_url = "/AppCoder/notas/list"
+#     fields = ['mensaje']
+
+# class NotaUpdate(UpdateView):
+#     model = AgendarNota
+#     success_url = "/AppCoder/notas/list"
+#     fields = ['mensaje']
+
+# class NotaDelete(DeleteView):
+#     model = AgendarNota
+#     success_url = "/AppCoder/notas/list"
+
+# #Peliculas
+
+# class PeliculaList(ListView):
+#     model = GuardarPelicula
+#     template_name = "AppCoder/peliculas_list.html"
+
+# class PeliculaDetalle(DetailView):
+#     model = GuardarPelicula
+#     template_name = "AppCoder/pelicula_detalle.html"
+
+# class PeliculaCreacion(CreateView):
+#     model = GuardarPelicula
+#     success_url = "/AppCoder/peliculas/list"
+#     fields = ['nombre']
+
+# class PeliculaUpdate(UpdateView):
+#     model = GuardarPelicula
+#     success_url = "/AppCoder/peliculas/list"
+#     fields = ['nombre']
+
+# class PeliculaDelete(DeleteView):
+#     model = GuardarPelicula
+#     success_url = "/AppCoder/peliculas/list"
+
+#LOGIN
+
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login, logout, authenticate
+
+def login_request(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request, data= request.POST)
+        if form.is_valid():
+            usuario = form.cleaned_data.get('username')
+            contrasenia = form.cleaned_data.get('password')
+            user = authenticate(username=usuario,password=contrasenia)
+            if user is not None:
+                login(request,user)
+                return render(request,'AppCoder/inicio.html',{'mensaje':f"Bienvenido {usuario}"})
+            else:
+                return render(request,'AppCoder/login.html',{'mensaje':"Error, datos incorrectos",'form':form})
+        else:
+            return render(request,"AppCoder/login.html",{'mensaje':"Error, formulario erroneo",'form':form})
+    form = AuthenticationForm()
+    return render(request,"AppCoder/login.html",{'form':form})
+
+#REGISTER
+
+def register(request):
+    if request.method == "POST":
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            form.save()
+            return render(request,"AppCoder/registro.html",{'mensaje':'Usuario creado correctamente','form':form})
+    else:
+        form = UserRegisterForm()
+    return render(request,"AppCoder/registro.html",{'form':form})
+
+#Decoradores
+
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def inicio(request):
+    return render(request,"AppCoder/inicio.html")
+

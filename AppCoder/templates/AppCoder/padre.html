@@ -24,10 +24,23 @@
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'Contactos' %}">Contacto</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'Peliculas' %}">Peliculas</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'Notas' %}">Notas</a>
+                <!-- {% if request.user.is_authenticated %}
+                <p class="text-muted small mb-4 mb-lg-0"> Hola, {{user.username}}!!!.</p>
+                <a class="btn btn-danger mb-4" href="{% url 'Logout' %}">Salir</a>
+                {% endif %} -->
             </div>
         </div>
         <!-- Page content wrapper-->
         <div id="page-content-wrapper">
+            <!-- Top navigation-->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <div class="container-fluid">
+                    {% if request.user.is_authenticated %}
+                    <p class="text-muted small mb-4 mb-lg-0"> Hola, {{user.username}}!!!.</p>
+                    <a class="btn btn-danger mb-4" href="{% url 'Logout' %}">Salir</a>
+                    {% endif %}
+                </div>
+            </nav>
             <div class="container-fluid">
                 <h1 class="mt-4">Tu MEMO</h1>
                 {% block contenidoCambia %}

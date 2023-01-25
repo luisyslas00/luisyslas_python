@@ -3,7 +3,7 @@
 
 {% block contenidoCambia %}
     <!-- Contenido Formulario -->
-    <h2>Contactos</h2>
+  <!--   <h2>Contactos</h2>
     {% if miFormulario.errors %}
         <p>Error al enviar</p>
     {% endif %}
@@ -12,7 +12,8 @@
             {{miFormulario.as_table}}
         </table>
         <input type="submit" value="Enviar">
-    </form>
-    <a href="{% url 'BuscarContacto' %}">Buscar Contacto</a>
-    <a href="{% url 'ListaContactos' %}">Lista de Contactos</a>
+    </form> -->
+    <a href="{% url 'BuscarContacto' %}" class="btn btn-info">Buscar Contacto</a>
+    <a href="{% url 'List' %}" class="btn btn-warning">Lista de Contactos</a>
+    <a href="{% url 'New' %}" class="btn btn-success">Agregar Contacto</a>
 {% endblock %}

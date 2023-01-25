@@ -1,0 +1,11 @@
+{% extends "AppCoder/padre.html" %}
+{% load static %}
+
+{% block contenidoCambia %}
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <p class="card-text">{{nota.mensaje}}</p>
+        <a href="{% url 'ListNota' %}" class="btn btn-primary">Regresar</a>
+    </div>
+</div>
+{% endblock %}
