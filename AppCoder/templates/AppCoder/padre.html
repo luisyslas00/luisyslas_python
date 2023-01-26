@@ -36,6 +36,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                 <div class="container-fluid">
                     {% if request.user.is_authenticated %}
+                    <img src="{{url}}" height="40px"/>
                     <h2 class="text-muted small mb-4 mb-lg-0"> Hola, {{user.username}}</h2>
                     <a href="{% url 'EditarPerfil' %}" class="btn btn-success">Editar Perfil</a>
                     <a class="btn btn-danger" href="{% url 'Logout' %}">Cerrar Sesión</a>

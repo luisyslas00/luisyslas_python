@@ -9,3 +9,4 @@ admin.site.register(GuardarPelicula)
 
 admin.site.register(AgendarNota)
 
+admin.site.register(Avatar)

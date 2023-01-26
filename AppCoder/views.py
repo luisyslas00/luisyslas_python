@@ -2,7 +2,7 @@ from django.http.request import QueryDict
 from django.shortcuts import render, HttpResponse
 from django.http import HttpResponse
 from AppCoder.forms import ContactoFormulario, PeliculaFormulario, NotaFormulario, UserRegisterForm
-from AppCoder.models import Contacto, GuardarPelicula, AgendarNota
+from AppCoder.models import Contacto, GuardarPelicula, AgendarNota, Avatar
 
 # Create your views here.
 
@@ -114,7 +114,7 @@ def editarContacto(request,contacto_nombre):
     if request.method == "POST":
         miFormulario = ContactoFormulario(request.POST)
         print(miFormulario)
-        if miFormulaio.is_valid:
+        if miFormulario.is_valid:
             informacion = miFormulario.cleaned_data
             contacto.nombre = informacion['nombre']
             contacto.apellido = informacion['apellido']
@@ -304,7 +304,8 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def inicio(request):
-    return render(request,"AppCoder/inicio.html")
+    avatares = Avatar.objects.filter(user=request.user.id)
+    return render(request,"AppCoder/inicio.html",{'url':avatares[0].imagen.url})
 
 #Editar Perfil
 
@@ -326,3 +327,9 @@ def editarPerfil(request):
     else:
         miFormulario = UserEditForm(initial={'email': usuario.email})
     return render(request, "AppCoder/editarPerfil.html", {"miFormulario": miFormulario, "usuario": usuario})
+
+# #Agregar Avatar
+# @login_required
+# def agregarAvatar(request):
+#     if request.method == "POST":
+#         miFormulario = AvatarFormulario(request.POST,request.FILES)
