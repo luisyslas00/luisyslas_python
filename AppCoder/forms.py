@@ -19,10 +19,21 @@ class NotaFormulario(forms.Form):
 
 class UserRegisterForm(UserCreationForm):
     username = forms.CharField(label='Usuario')
-    email = forms.EmailField()
+    email = forms.EmailField(label='Email')
     password1 = forms.CharField(label='Contraseña',widget=forms.PasswordInput)
     password2 = forms.CharField(label='Repetir Contraseña',widget=forms.PasswordInput)
     class Meta:
         model = User
         fields = ['username','email','password1','password2']
+        help_texts = {k:"" for k in fields}
+
+#Formulario editar perfil
+
+class UserEditForm(UserCreationForm):
+    email = forms.EmailField(label='Email')
+    password1 = forms.CharField(label='Contraseña',widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Repetir Contraseña',widget=forms.PasswordInput)
+    class Meta:
+        model = User
+        fields = ['email','password1','password2']
         help_texts = {k:"" for k in fields}

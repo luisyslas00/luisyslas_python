@@ -306,3 +306,23 @@ from django.contrib.auth.decorators import login_required
 def inicio(request):
     return render(request,"AppCoder/inicio.html")
 
+#Editar Perfil
+
+from AppCoder.forms import UserEditForm
+
+# Vista de editar el perfil
+@login_required
+def editarPerfil(request):
+    usuario = request.user
+    if request.method == 'POST':
+        miFormulario = UserEditForm(request.POST)
+        if miFormulario.is_valid():
+            informacion = miFormulario.cleaned_data
+            usuario.email = informacion['email']
+            usuario.password1 = informacion['password1']
+            usuario.password2 = informacion['password2']
+            usuario.save()
+            return render(request, "AppCoder/inicio.html",{'mensaje':'Su perfil ha sido actualizado'})
+    else:
+        miFormulario = UserEditForm(initial={'email': usuario.email})
+    return render(request, "AppCoder/editarPerfil.html", {"miFormulario": miFormulario, "usuario": usuario})
