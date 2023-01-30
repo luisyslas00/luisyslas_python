@@ -24,18 +24,14 @@ urlpatterns = [
     path('listaNotas',views.listaNotas,name="ListaNotas"),
     path('eliminarNota/<nota_mensaje>/',views.eliminarNota,name="EliminarNota"),
     path('editarNota/<nota_mensaje>/',views.editarNota,name="EditarNota"),
-    #CBV-- Contactos
     path('contactos/list',views.ContactoList.as_view(),name="List"),
     path(r'^(?P<pk>\d+)$', views.ContactoDetalle.as_view(), name='Detail'),
     path(r'^nuevo$', views.ContactoCreacion.as_view(), name='New'),
     path(r'^editar/(?P<pk>\d+)$', views.ContactoUpdate.as_view(), name='Edit'),
     path(r'^borrar/(?P<pk>\d+)$', views.ContactoDelete.as_view(), name='Delete'),    
-    #LOGIN
     path('login', views.login_request,name='Login'),
-    #REGISTER
     path('register',views.register,name='Register'),
-    #LOGOUT
     path('logout',LogoutView.as_view(template_name="AppCoder/logout.html"),name='Logout'),
-    #EDITAR PERFIL
+
     path('editarPerfil', views.editarPerfil, name='EditarPerfil'),
 ]

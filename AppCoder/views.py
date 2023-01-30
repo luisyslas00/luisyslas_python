@@ -218,54 +218,6 @@ class ContactoDelete(DeleteView):
     model = Contacto
     success_url = "/AppCoder/contactos/list"
 
-#Notas
-
-# class NotaList(ListView):
-#     model = AgendarNota
-#     template_name = "AppCoder/notas_list.html"
-
-# class NotaDetalle(DetailView):
-#     model = AgendarNota
-#     template_name = "AppCoder/nota_detalle.html"
-
-# class NotaCreacion(CreateView):
-#     model = AgendarNota
-#     success_url = "/AppCoder/notas/list"
-#     fields = ['mensaje']
-
-# class NotaUpdate(UpdateView):
-#     model = AgendarNota
-#     success_url = "/AppCoder/notas/list"
-#     fields = ['mensaje']
-
-# class NotaDelete(DeleteView):
-#     model = AgendarNota
-#     success_url = "/AppCoder/notas/list"
-
-# #Peliculas
-
-# class PeliculaList(ListView):
-#     model = GuardarPelicula
-#     template_name = "AppCoder/peliculas_list.html"
-
-# class PeliculaDetalle(DetailView):
-#     model = GuardarPelicula
-#     template_name = "AppCoder/pelicula_detalle.html"
-
-# class PeliculaCreacion(CreateView):
-#     model = GuardarPelicula
-#     success_url = "/AppCoder/peliculas/list"
-#     fields = ['nombre']
-
-# class PeliculaUpdate(UpdateView):
-#     model = GuardarPelicula
-#     success_url = "/AppCoder/peliculas/list"
-#     fields = ['nombre']
-
-# class PeliculaDelete(DeleteView):
-#     model = GuardarPelicula
-#     success_url = "/AppCoder/peliculas/list"
-
 #LOGIN
 
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
