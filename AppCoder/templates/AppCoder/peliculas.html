@@ -11,8 +11,8 @@
         <table>
             {{miFormulario.as_table}}
         </table>
-        <input type="submit" value="Enviar">
+        <input class="btn btn-success mt-4" type="submit" value="Enviar">
     </form>
-    <a href="{% url 'BuscarPelicula' %}">Buscar Pelicula</a>
-    <a href="{% url 'ListaPeliculas' %}">Lista de Películas</a>
+    <a class="btn btn-primary mt-4" href="{% url 'BuscarPelicula' %}">Buscar Pelicula</a>
+    <a class="btn btn-info mt-4" href="{% url 'ListaPeliculas' %}">Lista de Películas</a>
 {% endblock %}

@@ -3,10 +3,14 @@
 
 {% block contenidoCambia %}
    {% for p in peliculas %}
-    <li>{{p}}</li>
-    <button><a href="{% url 'EliminarPelicula' p.nombre %}">Eliminar</a></button>
-    <button><a href="{% url 'EditarPelicula' p.nombre %}">Editar</a></button>
+   <div class="card mt-4" style="width: 18rem;">
+      <div class="card-body">
+         <p>{{p}}</p>
+         <a class="btn btn-danger" href="{% url 'EliminarPelicula' p.nombre %}">Eliminar</a></button>
+         <a class="btn btn-warning" href="{% url 'EditarPelicula' p.nombre %}">Editar</a></button>
+      </div>
+   </div>
    {% endfor %}
-   <a href="{% url 'Peliculas' %}">Agregar Película</a>
+   <a class="btn btn-success mt-4" href="{% url 'Peliculas' %}">Agregar Película</a>
 {% endblock %}
 

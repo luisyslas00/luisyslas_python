@@ -9,6 +9,9 @@ from AppCoder.models import Contacto, GuardarPelicula, AgendarNota, Avatar
 def inicio(request):
     return render(request,'AppCoder/inicio.html')
 
+def aboutMe(request):
+    return render(request, 'AppCoder/aboutMe.html')
+
 def contactos(request):
     if request.method == "POST":
         miFormulario = ContactoFormulario(request.POST)

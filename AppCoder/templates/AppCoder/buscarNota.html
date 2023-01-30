@@ -6,14 +6,16 @@
 
         <input type="text" name="nota" id="nota" required>
     
-        <input type="submit" value="Buscar" />
+        <input class="btn btn-success" type="submit" value="Buscar" />
     </form>
-    <a class="" href="{% url 'Inicio' %}">Volver a Inicio</a>
+    <a class="btn btn-dark mt-4" href="{% url 'Inicio' %}">Volver a Inicio</a>
     {% if notas %}
         {% for nota in notas %}
-        <p> {{nota.mensaje}} </p>
+        <div class="card mt-4" style="width: 18rem;">
+            <div class="card-body">
+                <p> {{nota.mensaje}} </p>
+            </div>
+        </div>
         {% endfor %}
-    {% else %}
-        <h3>Nota no encontrada</h3>
     {% endif %}
 {% endblock %}

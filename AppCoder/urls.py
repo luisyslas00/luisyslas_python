@@ -7,6 +7,7 @@ urlpatterns = [
     path('',views.inicio, name="Inicio"),
     path('contactos',views.contactos, name="Contactos"),
     path('peliculas',views.peliculas, name="Peliculas"),
+    path('aboutMe',views.aboutMe, name="AboutMe"),
     path('notas',views.notas,name="Notas"),
     path('buscarContacto', views.buscarContacto , name="BuscarContacto"),
     path('resultadoContacto/', views.resultadoContacto),
@@ -28,20 +29,7 @@ urlpatterns = [
     path(r'^(?P<pk>\d+)$', views.ContactoDetalle.as_view(), name='Detail'),
     path(r'^nuevo$', views.ContactoCreacion.as_view(), name='New'),
     path(r'^editar/(?P<pk>\d+)$', views.ContactoUpdate.as_view(), name='Edit'),
-    path(r'^borrar/(?P<pk>\d+)$', views.ContactoDelete.as_view(), name='Delete'),
-    #CBV-- Peliculas
-    # path('peliculas/list',views.PeliculaList.as_view(),name="ListPelicula"),
-    # path(r'^(?P<pk>\d+)$', views.PeliculaDetalle.as_view(), name='DetailPelicula'),
-    # path(r'^nuevo$', views.PeliculaCreacion.as_view(), name='NewPelicula'),
-    # path(r'^editar/(?P<pk>\d+)$', views.PeliculaUpdate.as_view(), name='EditPelicula'),
-    # path(r'^borrar/(?P<pk>\d+)$', views.PeliculaDelete.as_view(), name='DeletePelicula'),
-    # #CBV-- Notas
-    # path('notas/list',views.NotaList.as_view(),name="ListNota"),
-    # path(r'^(?P<pk>\d+)$', views.NotaDetalle.as_view(), name='DetailNota'),
-    # path(r'^nuevo$', views.NotaCreacion.as_view(), name='NewNota'),
-    # path(r'^editar/(?P<pk>\d+)$', views.NotaUpdate.as_view(), name='EditNota'),
-    # path(r'^borrar/(?P<pk>\d+)$', views.NotaDelete.as_view(), name='DeleteNota')
-    
+    path(r'^borrar/(?P<pk>\d+)$', views.ContactoDelete.as_view(), name='Delete'),    
     #LOGIN
     path('login', views.login_request,name='Login'),
     #REGISTER

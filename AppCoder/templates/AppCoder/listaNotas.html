@@ -3,10 +3,14 @@
 
 {% block contenidoCambia %}
    {% for n in notas %}
-    <li>{{n}}</li>
-    <button><a href="{% url 'EliminarNota' n.mensaje %}">Eliminar</a></button>
-    <button><a href="{% url 'EditarNota' n.mensaje %}">Editar</a></button>
+   <div class="card mt-4" style="width: 18rem;">
+      <div class="card-body">
+         <p>{{n}}</p>
+         <a class="btn btn-danger" href="{% url 'EliminarNota' n.mensaje %}">Eliminar</a>
+         <a class="btn btn-warning" href="{% url 'EditarNota' n.mensaje %}">Editar</a>
+      </div>
+   </div>
    {% endfor %}
-   <a href="{% url 'Notas' %}">Agregar Nota</a>
+   <a class="btn btn-success mt-4" href="{% url 'Notas' %}">Agregar Nota</a>
 {% endblock %}
 
